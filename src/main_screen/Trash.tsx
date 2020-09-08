@@ -20,19 +20,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Hand() {
+export default function Trash() {
   // dispatch の取得
   const dispatch = useDispatch();
   // state の取得
-  const hand: number[] = useSelector((state: RootState) => state.cardsState.hand)
+  const trash: number[] = useSelector((state: RootState) => state.cardsState.trash)
   const classes = useStyles();
 
-  const trash = (card: number) => dispatch(SimpleCardDrawModule.actions.trash(card));
+  const revert = (card: number) => dispatch(SimpleCardDrawModule.actions.revert(card));
   const cards = []
-  for(let num of hand){
+  for(let num of trash){
     cards.push(
       (
-        <Paper className={classes.paper} elevation={2} key={"hand_"+num} onClick={() => trash(num)}>
+        <Paper className={classes.paper} elevation={2} key={"hand_"+num} onClick={() => revert(num)}>
           <Box fontSize={32}>{num}</Box>
         </Paper>
       )

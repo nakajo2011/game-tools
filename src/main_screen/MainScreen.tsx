@@ -3,6 +3,7 @@ import {Container, FormHelperText, Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import Deck from './Deck';
 import Hand from './Hand';
+import Trash from './Trash';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +56,7 @@ export default function MainScreen() {
         <Grid item xs={8}>
           <Container component="fieldset" className={classes.trashField}>
             <FormHelperText component="legend">捨て札フィールド</FormHelperText>
+            <Trash/>
           </Container>
         </Grid>
       </Grid>
