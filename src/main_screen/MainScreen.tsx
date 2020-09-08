@@ -44,7 +44,7 @@ export default function MainScreen() {
   const classes = useStyles();
   return (
     <Container fixed className={classes.root}>
-      <Grid container xs={12} spacing={1}>
+      <Grid container spacing={1}>
         <Grid item xs={4}>
           <Container component="fieldset" className={classes.deckField}>
             <FormHelperText component="legend">山札フィールド</FormHelperText>
