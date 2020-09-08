@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, FormHelperText, Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import Deck from './Deck';
+import Hand from './Hand';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +60,9 @@ export default function MainScreen() {
       </Grid>
       <div style={{padding: "8px 0 0 0"}}/>
       <Container component="fieldset" className={classes.handField}>
-        <FormHelperText component="legend">手札フィールド</FormHelperText></Container>
+        <FormHelperText component="legend">手札フィールド</FormHelperText>
+        <Hand/>
+      </Container>
     </Container>
   );
 }
