@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Container, Paper, Box} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from '../rootReducer'
+import SimpleCardDrawModule from "../modules/SimpleCardDrawModule";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,15 +47,19 @@ const createDeck = (num: number, classes: any) => {
 };
 
 export default function Deck() {
-  const [cardNum, setCardNum] = useState(10);
+  // dispatch の取得
+  const dispatch = useDispatch();
+  // state の取得
+  const counter = useSelector((state: RootState) => state.counter)
+  const draw = () => dispatch(SimpleCardDrawModule.actions.draw());
   const classes = useStyles();
 
   const lastCard = () => {
-    if (cardNum > 0) {
+    if (counter > 0) {
       return (
-        <Paper className={classes.paper} style={{top: lastCardTop(cardNum) + "px", left: DECK_LEFT_POS + "px"}}
-               elevation={2} onClick={() => setCardNum(cardNum - 1)}>
-          <Box fontSize={32}>{cardNum}</Box>
+        <Paper className={classes.paper} style={{top: lastCardTop(counter) + "px", left: DECK_LEFT_POS + "px"}}
+               elevation={2} onClick={() => draw()}>
+          <Box fontSize={32}>{counter}</Box>
         </Paper>
       );
     }
@@ -60,7 +67,7 @@ export default function Deck() {
 
   return (
     <Container fixed className={classes.cardSheet}>
-      {createDeck(cardNum, classes)}
+      {createDeck(counter, classes)}
       {lastCard()}
     </Container>
   );
