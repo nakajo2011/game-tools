@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Paper, Box} from '@material-ui/core';
+import {Container, Paper} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from '../RootReducer'
@@ -58,9 +58,7 @@ export default function Deck() {
     if (deck.length > 0) {
       return (
         <Paper className={classes.paper} style={{top: lastCardTop(deck.length) + "px", left: DECK_LEFT_POS + "px"}}
-               elevation={2} onClick={() => draw()} key={"deck_"+(deck.length-1)}>
-          <Box fontSize={32}>{deck.length}</Box>
-        </Paper>
+               elevation={2} onClick={() => draw()} key={"deck_"+(deck.length-1)} />
       );
     }
   };
