@@ -36,7 +36,7 @@ const createDeck = (num: number, classes: any) => {
   for (let i = 0; i < num - 1; i++) {
     const style = {top: top + "px", left: left + "px"};
     const paper = (
-      <Card style={style} elevation={2} key={"deck_"+i}/>
+      <Card deck={true} style={style} elevation={2} key={"deck_"+i}/>
     );
     papers.push(paper);
     top -= DIFF;
@@ -59,7 +59,7 @@ export default function Deck() {
   const lastCard = () => {
     if (deck.length > 0) {
       return (
-        <Card style={{top: lastCardTop(deck.length) + "px", left: DECK_LEFT_POS + "px"}}
+        <Card deck={true} style={{top: lastCardTop(deck.length) + "px", left: DECK_LEFT_POS + "px"}}
                onClick={() => draw()} key={"deck_"+(deck.length-1)} />
       );
     }
