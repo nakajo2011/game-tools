@@ -1,9 +1,10 @@
 import React from 'react';
-import {Container, Paper} from '@material-ui/core';
+import {Container} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from '../RootReducer'
 import SimpleCardDrawModule from "../modules/SimpleCardDrawModule";
+import Card from './Card';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(8),
     height: theme.spacing(8),
     display: "inline-block",
+    // border: 'dashed 1px #ff0000',
   },
   cardSheet: {
     position: "relative",
@@ -34,7 +36,7 @@ const createDeck = (num: number, classes: any) => {
   for (let i = 0; i < num - 1; i++) {
     const style = {top: top + "px", left: left + "px"};
     const paper = (
-      <Paper className={classes.paper} style={style} elevation={2} key={"deck_"+i}/>
+      <Card style={style} elevation={2} key={"deck_"+i}/>
     );
     papers.push(paper);
     top -= DIFF;
@@ -57,8 +59,8 @@ export default function Deck() {
   const lastCard = () => {
     if (deck.length > 0) {
       return (
-        <Paper className={classes.paper} style={{top: lastCardTop(deck.length) + "px", left: DECK_LEFT_POS + "px"}}
-               elevation={2} onClick={() => draw()} key={"deck_"+(deck.length-1)} />
+        <Card style={{top: lastCardTop(deck.length) + "px", left: DECK_LEFT_POS + "px"}}
+               onClick={() => draw()} key={"deck_"+(deck.length-1)} />
       );
     }
   };
