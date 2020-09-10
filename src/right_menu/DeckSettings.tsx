@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {FormControl, FormLabel, FormHelperText, Button} from '@material-ui/core';
+import {FormControl, FormLabel, FormHelperText, Button, Divider} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import SelectColor from './SelectColor';
 import {useDispatch} from "react-redux";
 import SimpleCardDrawModule, {DeckSettingsState} from "../modules/SimpleCardDrawModule";
 
@@ -20,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px",
     width: "100%",
   },
+  divider: {
+    margin: theme.spacing(2),
+  }
 }));
 
 export default function DeckSettings() {
@@ -57,6 +61,9 @@ export default function DeckSettings() {
         {deckSetInput}
         <FormHelperText>セット持つデッキを作成</FormHelperText>
         <Button variant="outlined" color="primary" onClick={() => generate()}>作成</Button>
+
+        <Divider variant="middle" className={classes.divider}/>
+        <SelectColor/>
       </FormControl>
     </form>
   );
