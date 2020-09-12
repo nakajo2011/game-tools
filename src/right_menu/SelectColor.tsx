@@ -2,6 +2,10 @@ import React from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import {FormControl, FormLabel, Radio} from '@material-ui/core';
 import {green, orange, red} from '@material-ui/core/colors';
+import {RootState} from "../RootReducer";
+import {useDispatch, useSelector} from "react-redux";
+import SimpleCardDrawModule from "../modules/SimpleCardDrawModule";
+import {DEFAULT_CARD_COLOR_WHITE} from "../constants";
 
 const useStyles = makeStyles((theme) => ({
   fieldset: {
@@ -23,12 +27,17 @@ const GREEN_VALUE: string = "green";
 const WHITE_VALUE: string = "white";
 
 const colors: any = {
-  [RED_VALUE]: red[600],
-  [ORANGE_VALUE]: orange[600],
-  [GREEN_VALUE]: green[600],
+  [RED_VALUE]: red[100],
+  [ORANGE_VALUE]: orange[100],
+  [GREEN_VALUE]: green[100],
+  [WHITE_VALUE]: DEFAULT_CARD_COLOR_WHITE,
 };
 
 export default function SelectColor() {
+  // dispatch の取得
+  const dispatch = useDispatch();
+  const setColor = (selectedValue: string) => dispatch(SimpleCardDrawModule.actions.setColor(colors[selectedValue]));
+
   const classes = useStyles();
   // state の取得
   const [selectedValue, setSelectedValue] = React.useState(WHITE_VALUE);
@@ -47,12 +56,11 @@ export default function SelectColor() {
                               checked={selectedValue === value}
                               value={value}
                               {...props} />);
-  }
+  };
 
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
-    console.log(colors);
-    console.log(event.target.value);
+    setColor(event.target.value);
   };
 
   const WhiteRadio = ColoredRadio(white, WHITE_VALUE);

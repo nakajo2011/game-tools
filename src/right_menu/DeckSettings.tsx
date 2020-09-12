@@ -46,7 +46,6 @@ export default function DeckSettings() {
   // state の取得
   const generate = () => {
     let settings: DeckSettingsState = {min, max, deckSet};
-    console.log()
     dispatch(SimpleCardDrawModule.actions.generate(settings));
   }
 

@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {red} from '@material-ui/core/colors';
+import { DEFAULT_CARD_COLOR_WHITE } from "../constants";
 
 type State = {
   deck: number[],
   hand: number[],
-  trash: number[]
+  trash: number[],
+  color: string,
 }
 
 export type DeckSettingsState = {
@@ -40,13 +43,20 @@ const init = (min: number, max: number, deckSet: number) => {
     deck: deck,
     hand: [],
     trash: [],
+    color: '',
   }
 };
+
+const initialState = (() => {
+  const state =  init(1, 10, 1);
+  state.color = DEFAULT_CARD_COLOR_WHITE;
+  return state;
+})();
 
 // createSlice() で actions と reducers を一気に生成
 const SimpleCardDrawModule = createSlice({
   name: "cardsState",
-  initialState: init(1, 10, 1),
+  initialState: initialState,
   reducers: {
     generate (state: State, action: PayloadAction<DeckSettingsState>) {
       const p = action.payload;
@@ -77,6 +87,10 @@ const SimpleCardDrawModule = createSlice({
       state.trash = state.trash.filter(c => c !== revertCard);
       state.hand.push(revertCard);
     },
+    setColor(state: State, action: PayloadAction<string>) {
+      const newColor = action.payload;
+      state.color = newColor;
+    }
   }
 });
 
